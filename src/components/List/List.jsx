@@ -3,34 +3,11 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './style.js';
 import { Rating } from '@material-ui/lab/Rating';
 import PlaceDetails from './../PlaceDetails/PlaceDetails';
-const List = () => {
+const List = ({places}) => {
     const classes = useStyles();
     const [type, setType] = useState('restaurants')
     const [rating, setRating] = useState('')
-    const places = [
-        {name: 'Cool Place1'},
-        {name: 'Cool Place2'},
-        {name: 'Cool Place3'},
-        {name: 'Cool Place4'},
-        {name: 'Cool Place5'},
-        {name: 'Cool Place6'},
-        {name: 'Cool Place7'},
-        {name: 'Cool Place8'},
-        {name: 'Cool Place9'},
-        {name: 'Cool Place10'},
-        {name: 'Cool Place11'},
-        {name: 'Cool Place12'},
-        {name: 'Cool Place13'},
-        {name: 'Cool Place14'},
-        {name: 'Cool Place15'},
-        {name: 'Cool Place16'},
-        {name: 'Cool Place17'},
-        {name: 'Cool Place18'},
-        {name: 'Cool Place19'},
-        {name: 'Cool Place20'},
-        {name: 'Cool Place21'},
-
-    ];
+    
     return (
         <div className={classes.container}>
             <Typography variant='h6'>
