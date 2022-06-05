@@ -3,10 +3,10 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './style.js';
 import { Rating } from '@material-ui/lab/Rating';
 import PlaceDetails from './../PlaceDetails/PlaceDetails';
-const List = ({places}) => {
+
+const List = ({places, type, setType, rating, setRating,isLoading}) => {
     const classes = useStyles();
-    const [type, setType] = useState('restaurants')
-    const [rating, setRating] = useState('')
+   
     
     return (
         <div className={classes.container}>
