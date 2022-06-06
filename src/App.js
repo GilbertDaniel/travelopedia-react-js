@@ -17,7 +17,32 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
- console.log(coordinates);
+  console.log(coordinates);
+
+  // const places = [
+  //   { name: 'Cool Place1' },
+  //   { name: 'Cool Place2' },
+  //   { name: 'Cool Place3' },
+  //   { name: 'Cool Place4' },
+  //   { name: 'Cool Place5' },
+  //   { name: 'Cool Place6' },
+  //   { name: 'Cool Place7' },
+  //   { name: 'Cool Place8' },
+  //   { name: 'Cool Place9' },
+  //   { name: 'Cool Place10' },
+  //   { name: 'Cool Place11' },
+  //   { name: 'Cool Place12' },
+  //   { name: 'Cool Place13' },
+  //   { name: 'Cool Place14' },
+  //   { name: 'Cool Place15' },
+  //   { name: 'Cool Place16' },
+  //   { name: 'Cool Place17' },
+  //   { name: 'Cool Place18' },
+  //   { name: 'Cool Place19' },
+  //   { name: 'Cool Place20' },
+  //   { name: 'Cool Place21' },
+
+  // ];
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -35,32 +60,24 @@ const App = () => {
 
 
   useEffect(() => {
-    getPlacesDataByLatLng(coordinates.lat,coordinates.lng).then((data) => {
+    getPlacesDataByLatLng(type, coordinates.lat, coordinates.lng).then((data) => {
       setPlaces(data);
     })
-  }, [coordinates])
+  }, [type, coordinates])
 
   return (
     <>
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{ width: '100%' }}>
-        <Grid item xs={12} md={4}>
-          <List 
+        <Grid item xs={4} md={12}>
+          <List
             isLoading={isLoading}
             places={places}
             type={type}
             setType={setType}
             rating={rating}
             setRating={setRating}
-          />
-        </Grid>
-        <Grid item xs={12} md={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Map
-            setCoordinates={setCoordinates}
-            setBounds={setBounds}
-            coordinates={coordinates}
-            places={places}
           />
         </Grid>
       </Grid>

@@ -3,19 +3,17 @@ import axios from 'axios';
 const URL = 'https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary'
 const URL_LIST_CORRDS = 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng';
 const options = {
+    method: 'GET',
+    url: 'https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng',
     params: {
-        // bl_latitude: '11.847676',
-        // tr_latitude: '12.838442',
-        // bl_longitude: '109.095887',
-        // tr_longitude: '109.149359',
-        latitude: '52.520007',
-        longitude: '13.404954',
+      latitude: '12.91285',
+      longitude: '100.87808'
     },
     headers: {
-        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
-        'X-RapidAPI-Key': 'c5eef63db3msh4d54fecd31437c6p14bd29jsnd0fecaa4d73e'
+      'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
+      'X-RapidAPI-Key': '0d5eb77314msh4a89796e2dfdbccp1f4cb8jsn82582a40c448'
     }
-};
+  };
 
 // axios.request(options).then(function (response) {
 //     console.log(response.data);
@@ -34,7 +32,7 @@ export const getPlacesData = async (type, sw, ne) => {
                 tr_latitude: ne.lat,
             },
             headers: {
-                'X-RapidAPI-Key': 'c5eef63db3msh4d54fecd31437c6p14bd29jsnd0fecaa4d73e',
+                'X-RapidAPI-Key': '0d5eb77314msh4a89796e2dfdbccp1f4cb8jsn82582a40c448',
                 'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
             },
         });
@@ -47,18 +45,18 @@ export const getPlacesData = async (type, sw, ne) => {
 }
 
 
-export const getPlacesDataByLatLng = async (lat,lng) => {
+export const getPlacesDataByLatLng = async (type, lat,lng) => {
 
     try {
-        const { data: { data } } = await axios.get(URL_LIST_CORRDS, {
+        const { data: { data } } = await axios.get(`https://travel-advisor.p.rapidapi.com/${type}/list-by-latlng`, {
             params: {
                 latitude: lat,
-                longitude: lng,
-            },
-            headers: {
-                'X-RapidAPI-Key': 'c5eef63db3msh4d54fecd31437c6p14bd29jsnd0fecaa4d73e',
-                'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
-            },
+                longitude: lng
+              },
+              headers: {
+                'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
+                'X-RapidAPI-Key': '0d5eb77314msh4a89796e2dfdbccp1f4cb8jsn82582a40c448'
+              }
         });
 
         return data;
