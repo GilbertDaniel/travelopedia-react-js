@@ -17,28 +17,28 @@ const App = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
- console.log(isLoading);
+ console.log(coordinates);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
       setCoordinates({ lat: latitude, lng: longitude });
     });
   }, []);
-  useEffect(() => {
-    if (bounds) {
-      setIsLoading(true);
-      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-        setPlaces(data);
-      })
-    }
-  }, [type,coordinates,bounds])
-
-
   // useEffect(() => {
-  //   getPlacesDataByLatLng(coordinates.lat,coordinates.lng).then((data) => {
-  //     setPlaces(data);
-  //   })
-  // }, [coordinates])
+  //   if (bounds) {
+  //     setIsLoading(true);
+  //     getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
+  //       setPlaces(data);
+  //     })
+  //   }
+  // }, [type,coordinates,bounds])
+
+
+  useEffect(() => {
+    getPlacesDataByLatLng(coordinates.lat,coordinates.lng).then((data) => {
+      setPlaces(data);
+    })
+  }, [coordinates])
 
   return (
     <>
