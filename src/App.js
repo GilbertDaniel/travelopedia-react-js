@@ -14,36 +14,9 @@ const App = () => {
 
   const [type, setType] = useState('restaurants')
   const [rating, setRating] = useState('')
+  const [filteredPlaces, SetFilterPlaces] = useState([])
 
   const [isLoading, setIsLoading] = useState(false);
-
-  console.log(coordinates);
-
-  // const places = [
-  //   { name: 'Cool Place1' },
-  //   { name: 'Cool Place2' },
-  //   { name: 'Cool Place3' },
-  //   { name: 'Cool Place4' },
-  //   { name: 'Cool Place5' },
-  //   { name: 'Cool Place6' },
-  //   { name: 'Cool Place7' },
-  //   { name: 'Cool Place8' },
-  //   { name: 'Cool Place9' },
-  //   { name: 'Cool Place10' },
-  //   { name: 'Cool Place11' },
-  //   { name: 'Cool Place12' },
-  //   { name: 'Cool Place13' },
-  //   { name: 'Cool Place14' },
-  //   { name: 'Cool Place15' },
-  //   { name: 'Cool Place16' },
-  //   { name: 'Cool Place17' },
-  //   { name: 'Cool Place18' },
-  //   { name: 'Cool Place19' },
-  //   { name: 'Cool Place20' },
-  //   { name: 'Cool Place21' },
-
-  // ];
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
       setCoordinates({ lat: latitude, lng: longitude });
@@ -58,10 +31,15 @@ const App = () => {
   //   }
   // }, [type,coordinates,bounds])
 
+  useEffect(() => {
+      const filteredPlaces = places.filter((place) => place.rating > rating);
+      SetFilterPlaces(filteredPlaces);
+  }, [rating])
 
   useEffect(() => {
     getPlacesDataByLatLng(type, coordinates.lat, coordinates.lng).then((data) => {
       setPlaces(data);
+      SetFilterPlaces([]);
     })
   }, [type, coordinates])
 
@@ -70,10 +48,10 @@ const App = () => {
       <CssBaseline />
       <Header />
       <Grid container spacing={3} style={{ width: '100%' }}>
-        <Grid item xs={4} md={12}>
+        <Grid item xs={12} md={12}>
           <List
             isLoading={isLoading}
-            places={places}
+            places={filteredPlaces.length ? filteredPlaces : places}
             type={type}
             setType={setType}
             rating={rating}
